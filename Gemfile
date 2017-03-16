@@ -51,3 +51,6 @@ ruby "2.3.1"
 gem 'puma'
 
 gem 'devise'
+
+gem 'haml'
+gem 'html2haml'
