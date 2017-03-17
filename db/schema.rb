@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316235608) do
+ActiveRecord::Schema.define(version: 20170317004202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20170316235608) do
 
   add_index "fields", ["user_id"], name: "index_fields_on_user_id", using: :btree
 
+  create_table "text_field_values", force: :cascade do |t|
+    t.integer  "field_id"
+    t.integer  "contact_id"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "text_field_values", ["contact_id"], name: "index_text_field_values_on_contact_id", using: :btree
+  add_index "text_field_values", ["field_id"], name: "index_text_field_values_on_field_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -56,4 +67,6 @@ ActiveRecord::Schema.define(version: 20170316235608) do
 
   add_foreign_key "contacts", "users"
   add_foreign_key "fields", "users"
+  add_foreign_key "text_field_values", "contacts"
+  add_foreign_key "text_field_values", "fields"
 end

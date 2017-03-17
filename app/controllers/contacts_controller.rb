@@ -12,14 +12,19 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
+    @fields = current_user.fields
+
+    @fields.each do |field|
+      @contact.text_field_values.new(field_id: field.id) if field.text?
+    end
   end
 
   def edit
+    @fields = current_user.fields
   end
 
   def create
-    @contact = Contact.new(contact_params)
-    @contact.set_user(current_user)
+    @contact = current_user.contacts.new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -60,7 +65,7 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params.require(:contact).permit(:name, :email)
+      params.require(:contact).permit(:name, :email, text_field_values_attributes: [:id, :value, :contact_id, :field_id])
     end
 
 end

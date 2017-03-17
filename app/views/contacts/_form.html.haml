@@ -15,5 +15,10 @@
     = f.label :email
     %br/
     = f.text_field :email
+
+    = f.fields_for :text_field_values do |tfv|
+      = tfv.label tfv.object.field.name
+      = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
+      = tfv.text_field :value
   .actions
     = f.submit

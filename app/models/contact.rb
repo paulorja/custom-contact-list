@@ -1,8 +1,5 @@
 class Contact < ActiveRecord::Base
   belongs_to :user
-
-  def set_user(user)
-    self.user_id = user.id
-  end
-
+  has_many :text_field_values
+  accepts_nested_attributes_for :text_field_values
 end
