@@ -1,9 +1,25 @@
-%nav
-  - if user_signed_in?
-    = link_to 'contacts', contacts_path
-    = link_to 'fields', fields_path
-    = link_to 'logout', destroy_user_session_path, method: :delete
-  - else
-    = link_to 'sign in', new_user_session_path
-    = link_to 'sign up', new_user_registration_path
-%hr
+%nav.navbar.navbar-default{:role => "navigation"}
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{:href => root_path} Contact List
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        - if user_signed_in?
+          %li{class: controller_name == 'contacts' ? 'active' : ''}
+            = link_to 'Contacts', contacts_path
+          %li{class: controller_name == 'fields' ? 'active' : ''}
+            = link_to 'Fields', fields_path
+        - else
+          %li{class: controller_name == 'sessions' ? 'active' : ''}
+            = link_to 'Sign In', new_user_session_path
+          %li{class: controller_name == 'registrations' ? 'active' : ''}
+            = link_to 'Sign Up', new_user_registration_path
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li
+            = link_to 'Logout', destroy_user_session_path, method: :delete

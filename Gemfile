@@ -54,3 +54,6 @@ gem 'devise'
 
 gem 'haml'
 gem 'html2haml'
+
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
