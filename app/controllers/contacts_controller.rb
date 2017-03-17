@@ -22,6 +22,15 @@ class ContactsController < ApplicationController
 
   def edit
     @fields = current_user.fields
+
+    @fields.each do |field|
+      if field.text? and !@contact.text_field_values.map(&:field_id).include? field.id
+        @contact.text_field_values.new(field_id: field.id)
+      end
+      if field.text_area? and !@contact.text_area_field_values.map(&:field_id).include? field.id
+        @contact.text_area_field_values.new(field_id: field.id)
+      end
+    end
   end
 
   def create
