@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   before_action :set_field, :authorize_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @fields = Field.where(user_id: current_user.id)
+    @fields = current_user.fields
   end
 
   def show
@@ -18,7 +18,7 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @field = Field.new(create_field_params)
+    @field = current_user.fields.new(field_params)
 
     respond_to do |format|
       if @field.save
@@ -58,15 +58,10 @@ class FieldsController < ApplicationController
       end
     end
 
-    def create_field_params
-      {
-        user_id: current_user.id,
-        field_type: params['field']['field_type'].to_i
-      }.merge(field_params)
-    end
-
     def field_params
-      params.require(:field).permit(:name)
+      {
+        field_type: params[:field][:field_type].to_i
+      }.merge(params.require(:field).permit(:name))
     end
 
 end
