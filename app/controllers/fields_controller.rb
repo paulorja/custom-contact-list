@@ -18,9 +18,7 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @field = Field.new(field_params)
-    @field.set_user(current_user)
-
+    @field = Field.new(create_field_params)
 
     respond_to do |format|
       if @field.save
@@ -45,7 +43,6 @@ class FieldsController < ApplicationController
     @field.destroy
     respond_to do |format|
       format.html { redirect_to fields_url, notice: 'Field was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -61,8 +58,15 @@ class FieldsController < ApplicationController
       end
     end
 
+    def create_field_params
+      {
+        user_id: current_user.id,
+        field_type: params['field']['field_type'].to_i
+      }.merge(field_params)
+    end
+
     def field_params
-      params.require(:field).permit(:user_id, :name)
+      params.require(:field).permit(:name)
     end
 
 end

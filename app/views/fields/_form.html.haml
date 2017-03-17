@@ -11,5 +11,15 @@
     = f.label :name
     %br/
     = f.text_field :name
+
+  - if edit_screen
+    .field
+      = @field.field_type.humanize
+  - if create_screen
+    .field
+      = f.label :field_type
+      %br/
+      = f.select :field_type, Field.field_types.map { |key, value| [key.humanize, value] }
+
   .actions
     = f.submit
