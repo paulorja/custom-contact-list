@@ -16,6 +16,7 @@ class ContactsController < ApplicationController
 
     @fields.each do |field|
       @contact.text_field_values.new(field_id: field.id) if field.text?
+      @contact.text_area_field_values.new(field_id: field.id) if field.text_area?
     end
   end
 
@@ -65,7 +66,10 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params.require(:contact).permit(:name, :email, text_field_values_attributes: [:id, :value, :contact_id, :field_id])
+      params.require(:contact).permit(:name, :email,
+                                      text_field_values_attributes: [:id, :value, :contact_id, :field_id],
+                                      text_area_field_values_attributes: [:id, :value, :contact_id, :field_id],
+      )
     end
 
 end

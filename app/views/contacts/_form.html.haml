@@ -20,5 +20,11 @@
       = tfv.label tfv.object.field.name
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
       = tfv.text_field :value
+
+    = f.fields_for :text_area_field_values do |tfv|
+      = tfv.label tfv.object.field.name
+      = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
+      = tfv.text_area :value
+
   .actions
     = f.submit
