@@ -17,12 +17,12 @@
     = f.text_field :email
 
     = f.fields_for :text_field_values do |tfv|
-      = tfv.label tfv.object.field.name
+      = tfv.label field_name(@fields, tfv.object.field_id)
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
       = tfv.text_field :value
 
     = f.fields_for :text_area_field_values do |tfv|
-      = tfv.label tfv.object.field.name
+      = tfv.label field_name(@fields, tfv.object.field_id)
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
       = tfv.text_area :value
 
