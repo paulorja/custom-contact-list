@@ -19,7 +19,9 @@
     .field
       = f.label :field_type
       %br/
-      = f.select :field_type, Field.field_types.map { |key, value| [key.humanize, value] }
+      = f.select :field_type, Field.field_types.map { |key, value| [key.humanize, value] }, {}, class: 'form-control'
+
+      %br
 
   .actions
     = f.submit class: 'btn btn-success'

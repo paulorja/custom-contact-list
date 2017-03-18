@@ -7,24 +7,24 @@
       %ul
         - @contact.errors.full_messages.each do |message|
           %li= message
-  .field
+  .form-group
     = f.label :name
-    %br/
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: 'form-control'
+  .form-group
     = f.label :email
-    %br/
-    = f.text_field :email
+    = f.text_field :email, class: 'form-control'
 
-    = f.fields_for :text_field_values do |tfv|
+  = f.fields_for :text_field_values do |tfv|
+    .form-group
       = tfv.label field_name(@fields, tfv.object.field_id)
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
-      = tfv.text_field :value
+      = tfv.text_field :value, class: 'form-control'
 
-    = f.fields_for :text_area_field_values do |tfv|
+  = f.fields_for :text_area_field_values do |tfv|
+    .form-group
       = tfv.label field_name(@fields, tfv.object.field_id)
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
-      = tfv.text_area :value
+      = tfv.text_area :value, class: 'form-control'
 
   .actions
-    = f.submit
+    = f.submit class: 'btn btn-success'
