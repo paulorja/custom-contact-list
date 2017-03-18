@@ -26,5 +26,13 @@
       = tfv.hidden_field :field_id, value: tfv.object.field_id.to_s
       = tfv.text_area :value, class: 'form-control'
 
+  = f.fields_for :combo_box_field_values do |cfv|
+    - if combobox_options(@options, cfv.object.field_id).size > 0
+      = cfv.label field_name(@fields, cfv.object.field_id)
+      = cfv.hidden_field :field_id, value: cfv.object.field_id.to_s
+      = cfv.select :selected_option_id, combobox_options(@options, cfv.object.field_id, cfv.object.selected_option_id), {}, class: 'form-control'
+
+  %br
+
   .actions
     = f.submit class: 'btn btn-success'

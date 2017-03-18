@@ -13,15 +13,18 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @fields = current_user.fields
+    @options = ComboBoxOption.where(field_id: @fields.pluck(:id))
 
     @fields.each do |field|
       @contact.text_field_values.new(field_id: field.id) if field.text?
       @contact.text_area_field_values.new(field_id: field.id) if field.text_area?
+      @contact.combo_box_field_values.new(field_id: field.id) if field.combo_box?
     end
   end
 
   def edit
     @fields = current_user.fields
+    @options = ComboBoxOption.where(field_id: @fields.pluck(:id))
 
     @fields.each do |field|
       if field.text? and !@contact.text_field_values.map(&:field_id).include? field.id
@@ -29,6 +32,9 @@ class ContactsController < ApplicationController
       end
       if field.text_area? and !@contact.text_area_field_values.map(&:field_id).include? field.id
         @contact.text_area_field_values.new(field_id: field.id)
+      end
+      if field.combo_box? and !@contact.combo_box_field_values.map(&:field_id).include? field.id
+        @contact.combo_box_field_values.new(field_id: field.id)
       end
     end
   end
@@ -78,6 +84,7 @@ class ContactsController < ApplicationController
       params.require(:contact).permit(:name, :email,
                                       text_field_values_attributes: [:id, :value, :contact_id, :field_id],
                                       text_area_field_values_attributes: [:id, :value, :contact_id, :field_id],
+                                      combo_box_field_values_attributes: [:id, :selected_option_id, :contact_id, :field_id],
       )
     end
 

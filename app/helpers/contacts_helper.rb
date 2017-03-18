@@ -6,4 +6,12 @@ module ContactsHelper
     end
   end
 
+  def combobox_options(db_options, field_id, selected_option = nil)
+    options = []
+    db_options.each do |option|
+      options << [option.name, option.id]if option.field_id == field_id
+    end
+    options_for_select options, selected: selected_option.to_s
+  end
+
 end
