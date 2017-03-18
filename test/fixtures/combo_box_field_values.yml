@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact_id: 
+  field_id: 
+  selected_option_id: 1
+
+two:
+  contact_id: 
+  field_id: 
+  selected_option_id: 1

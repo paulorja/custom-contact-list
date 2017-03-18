@@ -15,13 +15,28 @@
   - if edit_screen
     .form-group{style: 'color:red'}
       Field type can not be edited
+      = f.hidden_field :field_type, value: Field.field_types[@field.field_type]
   - if create_screen
     .field
       = f.label :field_type
       %br/
-      = f.select :field_type, Field.field_types.map { |key, value| [key.humanize, value] }, {}, class: 'form-control'
+      = f.select :field_type, Field.field_types.map { |key, value| [key.humanize, value] }, {}, class: 'form-control', id: 'field_type'
 
       %br
 
+      .alert.alert-danger.combobox-alert
+        Save combobox to edit options
+
   .actions
     = f.submit class: 'btn btn-success'
+
+:javascript
+  $('.combobox-alert').hide();
+
+  $('#field_type').change(function() {
+    if($(this).val() == 2) {
+      $('.combobox-alert').show();
+    } else {
+      $('.combobox-alert').hide();
+    }
+  });
