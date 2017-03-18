@@ -1,5 +1,13 @@
 %h1 Editing Field
+
 = render 'form'
-= link_to 'Show', @field
+
+%br
+
+= link_to @field, class: 'btn btn-default' do
+  %span.glyphicon.glyphicon-list
+  Show
 |
-= link_to 'Back', fields_path
+= link_to fields_path, class: 'btn btn-default' do
+  %span.glyphicon.glyphicon-arrow-left
+  Back
