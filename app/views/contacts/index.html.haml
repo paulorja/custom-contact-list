@@ -1,6 +1,6 @@
 %p#notice= notice
 %h1 Listing Contacts
-%table
+%table.table.table-striped
   %thead
     %tr
       %th Name
@@ -11,8 +11,20 @@
       %tr
         %td= contact.name
         %td= contact.email
-        %td= link_to 'Show', contact
-        %td= link_to 'Edit', edit_contact_path(contact)
-        %td= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          .btn-group
+            = link_to contact, class: 'btn btn-default' do
+              %span.glyphicon.glyphicon-list
+              Show
+            = link_to edit_contact_path(contact), class: 'btn btn-default' do
+              %span.glyphicon.glyphicon-pencil
+              Edit
+            = link_to contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
+              %span.glyphicon.glyphicon-trash
+              Destroy
+
 %br/
-= link_to 'New Contact', new_contact_path
+
+= link_to new_contact_path, class: 'btn btn-info' do
+  %span.glyphicon.glyphicon-plus
+  New Field
