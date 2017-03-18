@@ -13,7 +13,7 @@
           %li{class: controller_name == 'contacts' ? 'active' : ''}
             = link_to 'Contacts', contacts_path
           %li{class: controller_name == 'fields' ? 'active' : ''}
-            = link_to 'Fields', fields_path
+            = link_to 'Custom Fields', fields_path
         - else
           %li{class: controller_name == 'sessions' ? 'active' : ''}
             = link_to 'Sign In', new_user_session_path
