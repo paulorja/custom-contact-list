@@ -41,6 +41,8 @@ class ContactsController < ApplicationController
 
   def create
     @contact = current_user.contacts.new(contact_params)
+    @fields = current_user.fields
+    @options = ComboBoxOption.where(field_id: @fields.pluck(:id))
 
     respond_to do |format|
       if @contact.save

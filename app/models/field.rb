@@ -6,4 +6,6 @@ class Field < ActiveRecord::Base
 
   enum field_type: [:text, :text_area, :combo_box]
 
+  validates :name, presence: true
+
 end

@@ -5,7 +5,7 @@ module FieldsHelper
   end
 
   def create_screen
-    true if action_name == 'new'
+    true if action_name == 'new' or action_name == 'create'
   end
 
 end
